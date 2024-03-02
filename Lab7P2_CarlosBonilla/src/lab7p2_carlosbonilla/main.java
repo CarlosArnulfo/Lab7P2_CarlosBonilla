@@ -61,10 +61,12 @@ JOptionPane p=new JOptionPane();
         MI_import = new javax.swing.JMenuItem();
         MI_clear = new javax.swing.JMenu();
         MI_refreshTree = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        Menu_clear = new javax.swing.JMenu();
         MI_ClearTree = new javax.swing.JMenuItem();
         MI_CearCB = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        MI_HELP = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         submenu_load.setLabel("load");
         submenu_load.addActionListener(new java.awt.event.ActionListener() {
@@ -173,35 +175,62 @@ JOptionPane p=new JOptionPane();
 
         jMenuBar1.add(jMenu1);
 
-        MI_clear.setText("Edit");
+        MI_clear.setText("Window");
 
-        MI_refreshTree.setText("jMenuItem2");
+        MI_refreshTree.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        MI_refreshTree.setText("Refresh tree");
+        MI_refreshTree.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MI_refreshTreeActionPerformed(evt);
+            }
+        });
         MI_clear.add(MI_refreshTree);
 
-        jMenu2.setText("jMenu2");
+        Menu_clear.setText("Clear");
 
+        MI_ClearTree.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         MI_ClearTree.setText("Clear Tree");
         MI_ClearTree.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MI_ClearTreeActionPerformed(evt);
             }
         });
-        jMenu2.add(MI_ClearTree);
+        Menu_clear.add(MI_ClearTree);
 
+        MI_CearCB.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         MI_CearCB.setText("Clear Command Bar");
         MI_CearCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MI_CearCBActionPerformed(evt);
             }
         });
-        jMenu2.add(MI_CearCB);
+        Menu_clear.add(MI_CearCB);
 
-        MI_clear.add(jMenu2);
+        MI_clear.add(Menu_clear);
 
         jMenuBar1.add(MI_clear);
 
-        jMenu3.setText("jMenu3");
-        jMenuBar1.add(jMenu3);
+        MI_HELP.setText("HELP");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_H, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setText("Tutorial comandos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        MI_HELP.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Q, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setText("Tutorial objetos");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        MI_HELP.add(jMenuItem2);
+
+        jMenuBar1.add(MI_HELP);
 
         setJMenuBar(jMenuBar1);
 
@@ -368,55 +397,6 @@ JOptionPane p=new JOptionPane();
         refreshTree(temp, new DefaultMutableTreeNode());
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void MI_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_newActionPerformed
-        String [] temp= (tf_commandBar.getText()).split(" "); 
-        BufferedWriter bw=null;
-        FileWriter fw =null;
-        File f=null;
-        try{
-            String archivoText="ID,producto,categoria,precio,pasillo,cesta\n";
-            DefaultTableModel modelo=(DefaultTableModel)jTable1.getModel();
-            for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
-                
-                
-                
-                if (modelo.getValueAt(i, 0)!=null&&
-                        modelo.getValueAt(i, 1)!=null&&
-                        modelo.getValueAt(i, 2)!=null&&
-                        modelo.getValueAt(i, 3)!=null&&
-                        modelo.getValueAt(i, 4)!=null&&
-                        modelo.getValueAt(i, 5)!=null) {
-                      archivoText+=modelo.getValueAt(i, 0)+","+modelo.getValueAt(i,1)+","+modelo.getValueAt(i,2)+","+modelo.getValueAt(i,3)+","+modelo.getValueAt(i,4)+","+modelo.getValueAt(i,5)+"\n";
-                }else{
-           
-            }}
-            
-            System.out.println(archivoText);
-            f=new File("./Archivos/"+temp[1]+".txt");
-                    fw=new FileWriter(f,false);
-                    bw=new BufferedWriter(fw);
-                    bw.write(archivoText);
-                    bw.flush();
-             DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
-                for (int i = model.getRowCount()-1; i >=0; i--) {
-                    model.removeRow(i);
-                }
-                jTable1.setModel(model);
-                 JOptionPane.showMessageDialog(this, "Se a creado el archivo con exito");
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-       
-    }//GEN-LAST:event_MI_newActionPerformed
-
-    private void MI_CearCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_CearCBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_MI_CearCBActionPerformed
-
-    private void MI_ClearTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_ClearTreeActionPerformed
-    ((DefaultTreeModel)jTree1.getModel()).setRoot(new DefaultMutableTreeNode());
-    }//GEN-LAST:event_MI_ClearTreeActionPerformed
-
     private void btn_addRowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addRowActionPerformed
         DefaultTableModel m=(DefaultTableModel)jTable1.getModel();
         Object[] nuevalinea=null;
@@ -494,23 +474,37 @@ JOptionPane p=new JOptionPane();
         refreshTree(uwu, new DefaultMutableTreeNode());
     }//GEN-LAST:event_submenu_refreshActionPerformed
 
+    private void MI_CearCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_CearCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MI_CearCBActionPerformed
+
+    private void MI_ClearTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_ClearTreeActionPerformed
+        ((DefaultTreeModel)jTree1.getModel()).setRoot(new DefaultMutableTreeNode());
+    }//GEN-LAST:event_MI_ClearTreeActionPerformed
+
+    private void MI_refreshTreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_refreshTreeActionPerformed
+        File uwu=new File("./Archivos");
+
+        refreshTree(uwu, new DefaultMutableTreeNode());
+    }//GEN-LAST:event_MI_refreshTreeActionPerformed
+
     private void MI_importActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_importActionPerformed
-      String [] temp= (tf_commandBar.getText()).split(" ");
+        String [] temp= (tf_commandBar.getText()).split(" ");
         File f=null;
-       BufferedReader br=null;
-       FileReader fr=null;
+        BufferedReader br=null;
+        FileReader fr=null;
         try{
-                
-                 f=new File("./Archivos/"+temp[1]+".txt");
-                if (f.exists()) {
-                    
-                   fr=new FileReader(f);
-                   
-                br=new BufferedReader(fr); 
+
+            f=new File("./Archivos/"+temp[1]+".txt");
+            if (f.exists()) {
+
+                fr=new FileReader(f);
+
+                br=new BufferedReader(fr);
                 String linea;
                 DefaultTableModel m =(DefaultTableModel)jTable1.getModel();
                 m.setRowCount(0);
-                
+
                 while((linea=br.readLine())!=null){
                     System.out.println(linea);
                     Object [] line=linea.split(",");
@@ -518,21 +512,69 @@ JOptionPane p=new JOptionPane();
                         System.out.println(line[i]);
                     }
                     m.addRow(line);
-                    
+
                 }
                 m.removeRow(0);
                 jTable1.setModel(m);
+            }
+
+            br.close();
+            fr.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+    }//GEN-LAST:event_MI_importActionPerformed
+
+    private void MI_newActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MI_newActionPerformed
+        String [] temp= (tf_commandBar.getText()).split(" ");
+        BufferedWriter bw=null;
+        FileWriter fw =null;
+        File f=null;
+        try{
+            String archivoText="ID,producto,categoria,precio,pasillo,cesta\n";
+            DefaultTableModel modelo=(DefaultTableModel)jTable1.getModel();
+            for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
+
+                if (modelo.getValueAt(i, 0)!=null&&
+                    modelo.getValueAt(i, 1)!=null&&
+                    modelo.getValueAt(i, 2)!=null&&
+                    modelo.getValueAt(i, 3)!=null&&
+                    modelo.getValueAt(i, 4)!=null&&
+                    modelo.getValueAt(i, 5)!=null) {
+                    archivoText+=modelo.getValueAt(i, 0)+","+modelo.getValueAt(i,1)+","+modelo.getValueAt(i,2)+","+modelo.getValueAt(i,3)+","+modelo.getValueAt(i,4)+","+modelo.getValueAt(i,5)+"\n";
+                }else{
+
+                }}
+
+                System.out.println(archivoText);
+                f=new File("./Archivos/"+temp[1]+".txt");
+                fw=new FileWriter(f,false);
+                bw=new BufferedWriter(fw);
+                bw.write(archivoText);
+                bw.flush();
+                DefaultTableModel model=(DefaultTableModel)jTable1.getModel();
+                for (int i = model.getRowCount()-1; i >=0; i--) {
+                    model.removeRow(i);
                 }
-               
-                
-                br.close();
-                fr.close();
-                
+                jTable1.setModel(model);
+                JOptionPane.showMessageDialog(this, "Se a creado el archivo con exito");
             }catch(Exception e){
                 e.printStackTrace();
-                
             }
-    }//GEN-LAST:event_MI_importActionPerformed
+
+    }//GEN-LAST:event_MI_newActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Escribe \"./create [nombre del archivo]\" para crear un archivo nuevo con los objetos de la tabla \nEscribe \"./load [nombre del archivo ya existente]\" para cargar un archivo en la tabla\nEscribe \"./refresh\" para actualizar el arbol\nEscribe \"./clear\" para limpiar la tabla en su totalidad");
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JOptionPane.showMessageDialog(this, "Cada objeto del supermercado tiene varias propiedades, su ID, nombre, categoria, precio, pasillo de ubicacion, y cesta en la que se encuentra"
+                + "\nEl ID es un numero unico del objeto, la categoria es un numero de 2 digitos, el precio puede incluir centavos, el pasillo es un numero de 3 digitos, y la cesta tiene 2 digitos"
+                + "\nSi a alguna fila le falta alguna propiedad del proucto, esta sera ignorada a la hora de crear archivos con la tabla, por ejemplo, si a una coca cola le falta precio, esta no aparecera en el archivo que se cree");
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -588,19 +630,21 @@ public void refreshTree(File p_raiz, DefaultMutableTreeNode nodo){
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MI_CearCB;
     private javax.swing.JMenuItem MI_ClearTree;
+    private javax.swing.JMenu MI_HELP;
     private javax.swing.JMenu MI_clear;
     private javax.swing.JMenuItem MI_import;
     private javax.swing.JMenuItem MI_new;
     private javax.swing.JMenuItem MI_refreshTree;
+    private javax.swing.JMenu Menu_clear;
     private javax.swing.JButton btn_Input;
     private javax.swing.JButton btn_addRow;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
