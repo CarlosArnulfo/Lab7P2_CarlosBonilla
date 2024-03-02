@@ -1,0 +1,2 @@
+ID,producto,categoria,precio,pasillo,cesta
+sd,f,f,f,f,2

@@ -1,0 +1,5 @@
+ID,producto,categoria,precio,pasillo,canasta
+1,un fresco,2,20.29,422,21
+2,sopa instantanea,3,45.00,211,22
+3,guilty gear xrd rev 2 for the playstation 4,1,8.00,766,11
+4,un perro muerto,5,0.80,100,89
